@@ -1,0 +1,688 @@
+body {
+    background: #F5F9FB;
+    margin: 0;
+    padding: 0;
+    font-family: Inter;
+}
+
+button {
+    font-family: Inter;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 250px;
+    height: 100vh;
+    background: #0F172B;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .logo_block {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    margin: 14px 0 60px 0;
+}
+
+.sidebar .logo_block img{
+    height: 24px;
+    width: 51px;
+    margin-right: 6px;
+}
+
+.sidebar .logo_block span {
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav_button {
+    width: 222px;
+    height: 40px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-radius: 10px;
+    transition: background 0.2s;
+    padding-left: 35px;
+    margin-bottom: 20px;
+    background: none;
+    border: none;
+}
+
+.nav_button img {
+    width: 19px;
+    height: 19px;
+    margin-right: 12px;
+}
+
+.nav_button a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: start;
+}
+
+.nav_button.active, .nav_button:hover {
+    background: #1C4DFE;
+    color: #fff;
+}
+
+.logout_container {
+    margin-top: auto; /* прижимает к низу */
+    padding: 40px 0 100px 0;
+}
+
+.logout_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout_block img{
+    width: 14px;
+    height: 14px;
+    margin-right: 12px;
+}
+
+.logout_block a{
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: start;
+}
+
+main {
+    margin-left: 250px;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0px 40px;
+    box-shadow: 0px 1px 50px 0px rgba(0, 0, 0, 0.15);
+    background: #FFFFFF;
+}
+
+.title_block {
+    color: #0F172B;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+
+.user_block {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.user_info {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-right: 10px;
+}
+
+.user_info span{
+    color: #0F172B;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+.user_role {
+    color: #64748B;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+.user_block img {
+    width: 45px;
+    height: 45px;
+}
+
+.content_block {
+    margin: 40px;
+    height: calc(100vh - 140px);
+    border-radius: 20px;
+
+    box-shadow: 0px 1px 50px 0px rgba(0, 0, 0, 0.15);
+    background: #FFFFFF; 
+}
+
+/* ========== СТИЛИ ДЛЯ ДОКУМЕНТОВ  ========== */
+.documents_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+}
+
+.documents_header h2 {
+    margin: 0;
+    color: #0F172B;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.documents_count {
+    color: #64748B;
+    font-size: 14px;
+    background: #F1F5F9;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.documents_container {
+    height: calc(100% - 81px);
+    overflow-y: auto;
+    padding: 20px 30px;
+}
+
+.documents_list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
+}
+
+/* ДИЗАЙН КАРТОЧКИ ДОКУМЕНТА */
+.document_card {
+    border-radius: 10px;
+    box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.25);
+    background: rgba(241, 245, 249, 1);
+    padding: 15px 20px 10px 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    width: 230px;
+    box-sizing: border-box;
+
+    /* Основной контейнер — флекс по вертикали */
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.document_card.hidden {
+    display: none !important;
+}
+
+.document_card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+/* Блок с превью — фиксированный размер и центрирование */
+.document_preview {
+    width: 160px;
+    height: 220px;
+    margin: 0 auto 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* Canvas внутри — масштабируется, но не искажается */
+.document_preview canvas {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Важно: сохраняет пропорции */
+    border-radius: 6px;
+}
+
+/* Блок с заголовком — может расти */
+/* Блок с заголовком — центрирование по вертикали и горизонтали */
+.document_content {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;         /* Центрируем по горизонтали */
+    min-height: 0;
+    text-align: center;          /* Чтобы текст переносился по центру */
+    padding: 0 8px;              /* Отступы, чтобы не упирался в края */
+    box-sizing: border-box;
+}
+
+/* Заголовок — без обрезки, полный текст */
+.document_title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+    height: 2.8em; /* Примерно 2 строки */
+    max-height: 2.8em;
+}
+
+/* Обёртка для заголовка и тултипа */
+.tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    overflow: visible;
+
+}
+
+/* Стили тултипа */
+/* Стили тултипа */
+.tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    z-index: 1000;
+    
+    /* Позиционирование над карточкой */
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    
+    /* Оформление */
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 6px 10px;
+    border-radius: 6px;
+
+    /* Максимальная ширина — 200px, минимальная — под контент */
+    min-width: 200px;
+    
+    /* Перенос текста */
+    white-space: normal;
+    line-height: 1.4;
+    text-align: center;
+
+    /* Ограничение до 2 строк */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    /* Анимация */
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+}
+
+/* При наведении — показываем */
+.tooltip-wrapper:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Стрелочка вниз */
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.85);
+}
+
+/* Блок с категориями и тегами */
+.document_groups {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.groups {
+    font-size: 12px;
+    color: #FFFFFF;
+    background: #1C4DFE;
+    padding: 2px 8px;
+    border-radius: 5px;
+    border: 1px solid #1C4DFE;
+    white-space: nowrap;
+}
+
+/* Нижняя часть карточки — всегда внизу */
+.document_meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-top: 8px;
+    margin-top: auto; 
+    font-size: 10px;
+    color: #64748B;
+}
+
+.document_meta > span {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+/* Стили для скроллбара */
+.documents_container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.documents_container::-webkit-scrollbar-track {
+    background: #F1F5F9;
+    border-radius: 10px;
+}
+
+.documents_container::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 10px;
+}
+
+.documents_container::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
+
+/* Состояния */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    color: #64748B;
+    font-size: 16px;
+    width: 100%;
+}
+
+.empty_state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #64748B;
+    text-align: center;
+    width: 100%;
+}
+
+.empty_state img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.action_buttons{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.action_btn{
+    height: 30px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
+
+.restore_btn {
+    width: 55%;
+    background-color: #1C4DFE;
+    color: #FFFFFF;
+}
+
+.delete_btn {
+    width: 40%;
+    background-color: #FFDFE1;
+    color: #903D41;
+}
+
+/* Стили для модального окна */
+.modal_container {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal_container.active {
+    display: flex;
+}
+
+.modal_block {
+    background: #FFFFFF;
+    border-radius: 20px;
+    width: 500px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+}
+
+.modal_header h2 {
+    color: #0F172B;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0px;
+    text-align: start;
+    margin: 0;
+}
+
+.modal_close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal_close img{
+    width: 20px;
+    height: 20px;
+}
+
+.modal_body {
+    padding: 20px 30px;
+}
+
+.modal_body p {
+    font-size: 18px;
+    text-align: center;
+}
+
+.form_actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;  
+    padding: 20px;
+}
+
+.modal_cancel,
+.modal_submit {
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+}
+
+.modal_cancel {
+    background: #F1F5F9;
+    color: #0F172B;
+}
+
+.modal_cancel:hover {
+    background: #E2E8F0;
+}
+
+.modal_submit {
+    background: #FFDFE1;
+    color: #903D41;
+}
+
+.modal_submit:hover {
+    background: #ebc2c6;
+}
+
+.modal_submit:disabled {
+    background: #94A3B8;
+    cursor: not-allowed;
+}
+
+/* Стили для модального окна подтверждения удаления */
+#deleteConfirmModal .modal_body {
+    padding: 20px 30px;
+    font-size: 18px;
+    color: #0F172B;
+    text-align: center;
+}
+
+#deleteConfirmModal .modal_body p {
+    margin: 0;
+}
+
+/* Стили для модальных окон */
+/* .modal_container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal_block {
+    background: #fff;
+    border-radius: 12px;
+    width: 400px;
+    max-width: 90vw;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.modal_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #f8f9fa;
+}
+
+.modal_header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #0F172B;
+}
+
+.modal_close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.modal_close:hover {
+    opacity: 1;
+}
+
+.modal_body {
+    padding: 24px 30px;
+    color: #0F172B;
+}
+
+.modal_body p {
+    margin: 0;
+    line-height: 1.6;
+    font-size: 14px;
+    text-align: center;
+}
+
+.form_actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 20px;
+    border-top: 1px solid #e0e0e0;
+    background: #f8f9fa;
+}
+
+.modal_cancel,
+.modal_submit {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: Inter;
+}
+
+.modal_cancel {
+    background: #e2e8f0;
+    color: #0F172B;
+}
+
+.modal_submit {
+    background: #dc2626;
+    color: white;
+} */

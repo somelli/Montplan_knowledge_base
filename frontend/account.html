@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="account.css">
+    <link href="media_screen.css" rel="stylesheet" type="text/css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+    <title>База знаний Монтплан</title>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo_block">
+            <img src="./src/image/logo.png" alt="logo">
+            <span>Монтплан</span>
+        </div>
+
+        <nav id="sidebarNav">
+            <!-- Меню будет генерироваться динамически -->
+        </nav>
+
+        <div class="logout_container">
+            <div class="logout_block">
+                <img src="./src/image/logout.png" alt="Выйти">
+                <a href="#" id="logoutLink">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <div class="title_block">Аккаунт</div>
+
+            <div class="user_block">
+                <div class="user_info">
+                    <span>Загрузка...</span>
+                    <div class="user_role">Загрузка...</div>
+                </div>
+                
+                <img src="./src/image/account_round_icon.png" alt="Аккаунт">
+            </div>
+        </header>
+
+        <div class="content_block">
+            <div class="welcome_header">
+                <div class="main_title">Добро пожаловать, <span>Имя</span>!</div>
+                <span class="sub_greeting">Вот обзор последней активности</span>
+            </div>
+
+            <div class="stats_row">
+                <div class="stat_item">
+                    <div class="stat_info">
+                        <span class="stat_label">В избранном</span>
+                        <span class="stat_number" id="favouritesCount">0</span>
+                    </div>
+                    <img class="favorite_img" src="./src/image/favorite.png">
+                </div>
+                <div class="stat_item">
+                    <div class="stat_info">
+                        <span class="stat_label">Папок избранного</span>
+                        <span class="stat_number" id="foldersCount">0</span>
+                    </div>
+                    <img class="folder_img" src="./src/image/favorite_folders.png">
+                </div>
+                <div class="stat_item">
+                    <div class="stat_info">
+                        <span class="stat_label">Просмотрено недавно</span>
+                        <span class="stat_number" id="recentViewsCount">0</span>
+                    </div>
+                    <img class="history_img" src="./src/image/file_history.png">
+                </div>
+            </div>
+
+            <div class="history_section">
+                <div class="history_header">
+                    <div class="header_title">
+                        <img src="/src/image/time.png" alt="История просмотров">
+                        <div class="history_title">История просмотров</div>
+                    </div>
+
+                    <button class="all_history_btn" onclick="window.location.href='./history.html'">
+                        <img src="./src/image/back.png">
+                        <span>Все файлы</span>
+                    </button>
+                </div>
+
+                <div class="history_docs" id="viewHistoryList">
+                    <!-- История будет загружаться здесь -->
+                </div>
+            </div>
+            
+        </div>
+    </main>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="./navigation.js"></script>
+    <script src="./account.js"></script>
+</body>
+</html>

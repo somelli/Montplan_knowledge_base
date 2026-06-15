@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="uploading_documents.css">
+    <link href="media_screen.css" rel="stylesheet" type="text/css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+    <title>База знаний Монтплан</title>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo_block">
+            <img src="./src/image/logo.png" alt="logo">
+            <span>Монтплан</span>
+        </div>
+
+        <nav id="sidebarNav">
+            <!-- Меню будет генерироваться динамически -->
+        </nav>
+
+        <div class="logout_container">
+            <div class="logout_block">
+                <img src="./src/image/logout.png" alt="Выйти">
+                <a href="#" id="logoutLink">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <div class="title_block">Загрузка</div>
+
+            <div class="user_block">
+                <div class="user_info">
+                    <span>Загрузка...</span>
+                    <div class="user_role">Загрузка...</div>
+                </div>
+                
+                <img src="./src/image/account_round_icon.png" alt="Аккаунт">
+            </div>
+        </header>
+
+        <div class="content_block">
+            <div class="main_title">Загрузка документов</div>
+
+            <div class="upload_ai_container">
+                <div class="upload_documents">
+                    <div class="upload_block" id="uploadArea">
+                        <div id="uploadDefaultContent">
+                            <img class="icon" src="./src/image/upload.png" alt="Загрузка">
+                            <div class="upload_label">Перетащите файл сюда</div>
+                            <div class="upload_description">или нажмите для выбора файла<br>Поддерживаются форматы: PDF</div>
+                            <button type="button" class="upload_button" id="browseBtn">Выбрать файл</button>
+                        </div>
+
+                        <div id="uploadSuccessContent" style="display: none;">
+                            <img class="icon" src="./src/image/success.png" alt="Загрузка">
+                            <div class="upload_success_label">Загружен: </div>
+                            <div class="upload_filename" id="fileNameDisplay"></div>
+                            <button type="button" class="delete_button" id="removeFile">Удалить</button>
+                        </div>
+
+                        <input type="file" id="fileInput" style="display:none" accept=".pdf">
+                    </div>
+                </div>
+
+                <div class="ai_block">
+                    <img class="icon" src="./src/image/ai_category.png" alt="Загрузка">
+                    <div class="ai_title">ИИ-категоризация</div>
+                    <div class="ai-description">Используйте искусственный интеллект для<br>автоматического определения категории и тегов<br>документа на основе его содержания</div>
+                    <button type="button" class="analyze_button">Анализировать</button>
+                </div>
+        </div>
+        
+        <div class="form_container">
+            <form id="documentForm">
+                <div class="form_group">
+                    <label for="documentName">Название документа</label>
+                    <div class="document_input_block">
+                        <input type="text" id="documentName" maxlength="500" placeholder="Введите название документа" oninput="document.getElementById('documentNameCounter').innerText=this.value.length+'/500'">
+                        <span class="counter" id="documentNameCounter">0/500</span>
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <label for="categories">Категория</label>
+                    <div class="custom_select" id="categorySelect" tabindex="0">
+                        <span class="selected">Выберите категорию</span>
+                        <div class="select_dropdown">
+                            <!-- Опции будут добавлены через JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <label for="tags">Теги</label>
+
+                    <!-- Отображение выбранных тегов -->
+                    <div class="tags_input" id="tagsInput" tabindex="0">
+                        <div class="tags_list" id="tagsList"></div>
+                        <input type="text" placeholder="Выбирите до 3 тегов" id="tagsSearch" autocomplete="off">
+                    </div>
+
+                    <!-- Выпадающий список с чекбоксами -->
+                    <div class="tags_dropdown" id="tagsDropdown">
+                        <div id="tagsOptions">
+                            <!-- Опции будут добавлены через JS -->
+                        </div>
+                    </div>
+                </div>
+                <button class="submit_button" type="submit">Загрузить документ</button>
+            </form>
+        </div>
+
+        <!-- Модальное окно оповещения о загрузке -->
+        <div id="successModal" class="modal_container">
+            <div class="modal_block">
+                <div class="modal_header">
+                    <h2>Документ успешно загружен!</h2>
+                    <button class="modal_close"><img src="./src/image/close.png" alt="Закрыть"></button>
+                </div>
+                <div class="modal_body">
+                    <p>Документ <strong id="uploadedDocName">Название документа</strong> был успешно загружен и добавлен в базу знаний.</p>
+                </div>
+                <div class="form_actions">
+                    <button type="button" class="modal_cancel">Закрыть</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для ошибок и уведомлений -->
+        <div id="messageModal" class="modal_container">
+            <div class="modal_block">
+                <div class="modal_header">
+                    <h2 id="messageModalTitle">Ошибка</h2>
+                    <button class="modal_close"><img src="./src/image/close.png" alt="Закрыть"></button>
+                </div>
+                <div class="modal_body">
+                    <p id="messageModalText">Сообщение</p>
+                </div>
+                <div class="form_actions">
+                    <button type="button" class="modal_cancel">Закрыть</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="./navigation.js"></script>
+    <script src="./uploading_documents.js"></script>
+
+    <script>
+        async function loadUserData() {
+        try {
+            const response = await fetch('/api/user');
+            
+            if (response.ok) {
+                const data = await response.json();
+                
+                if (data.user) {
+                    // Получаем первую роль из массива или показываем 'Пользователь' по умолчанию
+                    const userRole = data.user.roles && data.user.roles.length > 0 
+                        ? data.user.roles[0] 
+                        : 'Пользователь';
+                    
+                    // Обновляем данные в хедере
+                    const userNameSpan = document.querySelector('.user_info span');
+                    const userRoleDiv = document.querySelector('.user_role');
+                    
+                    if (userNameSpan) userNameSpan.textContent = data.user.name || data.user.email;
+                    if (userRoleDiv) userRoleDiv.textContent = userRole.toLowerCase();
+                }
+            }
+        } catch (error) {
+            console.error('Ошибка загрузки данных:', error);
+        }
+    }
+
+    // Загружаем данные при загрузке страницы
+    document.addEventListener('DOMContentLoaded', loadUserData);
+    </script>
+</body>
+</html>

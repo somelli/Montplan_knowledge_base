@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="template.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+    <title>База знаний Монтплан</title>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo_block">
+            <img src="./src/image/logo.png" alt="logo">
+            <span>Монтплан</span>
+        </div>
+
+        <nav id="sidebarNav">
+            <!-- Меню будет генерироваться динамически -->
+        </nav>
+
+
+        <div class="logout_container">
+            <div class="logout_block">
+                <img src="./src/image/logout.png" alt="Выйти">
+                <a href="#" id="logoutLink">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="search_container">
+            <div class="search_block">
+                <img src="./src/image/search.png" alt="Поиск">
+                <input type="texrappert" placeholder="Поиск по документам, тегам...">
+            </div>
+
+            <!-- Заменяем старый select -->
+            <button id="filterButton" class="filter_button">
+                Фильтры <span class="sort_arrow">▼</span>
+            </button>
+            <div id="filterDropdown" class="filter_dropdown_menu">
+                <div class="sort_menu_header">Фильтры</div>
+
+                <div class="filter_types">
+                    <!-- Категории -->
+                    <div class="filter_section">
+                        <strong>Категории</strong>
+                        <div id="categoriesContainer" class="filter_container"></div>
+                    </div>
+
+                    <!-- Теги -->
+                    <div class="filter_section">
+                        <strong>Теги</strong>
+                        <div id="tagsContainer" class="filter_container"></div>
+                    </div>
+
+                    <!-- Годы -->
+                    <div class="filter_section">
+                        <strong>Год</strong>
+                        <div id="yearsContainer" class="filter_container"></div>
+                    </div>
+                </div>
+
+                <!-- Кнопки -->
+                    <div class="sort_menu_footer">
+                        <button type="button" id="applyFiltersButton" class="reset_sort_button" style="margin-right: 8px;">
+                            Применить
+                        </button>
+                        <button type="button" id="resetFiltersButton" class="reset_sort_button">
+                            Сбросить
+                        </button>
+                    </div>
+            </div>
+
+            <div class="select_sorting">
+                <button id="sortButton" class="custom_sort_button">
+                    Сортировка <span class="sort_arrow">▲</span>
+                </button>
+                <div id="sortDropdown" class="sort_dropdown_menu">
+                    <div class="sort_menu_header">Сортировать</div>
+                    <label class="sort_option">
+                        <input type="radio" name="sort_criteria" value="name_asc" id="sort_name_asc">
+                        От А до Я
+                    </label>
+
+                    <label class="sort_option">
+                        <input type="radio" name="sort_criteria" value="name_desc" id="sort_name_desc">
+                        От Я до А
+                    </label>
+
+                    <label class="sort_option">
+                        <input type="radio" name="sort_criteria" value="newest" id="sort_newest">
+                        Сначала новые
+                    </label>
+
+                    <label class="sort_option">
+                        <input type="radio" name="sort_criteria" value="oldest" id="sort_oldest">
+                        Сначала старые
+                    </label>
+
+                    <!-- Кнопка сброса -->
+                    <div class="sort_menu_footer">
+                        <button type="button" id="resetSortButton" class="reset_sort_button">
+                            Сбросить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content_block">
+            <!-- Документы загружаются динамически -->
+        </div>
+    </main>
+
+    <!-- ========== HTML ЧАТА (всплывающее окно) ========== -->
+    <div class="chat-widget">
+        <div class="chat-button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="white"/>
+                <path d="M7 9H17" stroke="#1C4DFE" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M7 13H14" stroke="#1C4DFE" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+        </div>
+        
+        <div class="chat-window" style="display: none;">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <img class="chat-avatar" src="./src/image/ai.png" alt="Чат-бот">
+                    <div>
+                        <h3>Чат-ассистент</h3>
+                        <p>Задайте вопрос по документам</p>
+                    </div>
+                </div>
+                <button class="chat-close">
+                    <img src="./src/image/close_white.png" alt="Закрыть">
+                </button>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message assistant">
+                    <div class="message-avatar">
+                        <img src="./src/image/ai.png" alt="Чат-бот">
+                    </div>
+                    <div class="message-content">
+                        <p>Добрый день, чем могу помочь?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input-area">
+                <textarea id="chatInput" placeholder="Введите сообщение..."></textarea>
+                <button id="chatSendBtn" class="chat-send-btn" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path d="M22 2L11 13" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./pdf-config.js"></script>
+    <script type="module" src="./documents.js"></script>
+    <script type="module" src="./chat-widget.js"></script>
+    <script type="module" src="./navigation.js"></script>
+</body>
+</html>

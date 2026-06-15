@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="settings.css">
+    <link href="media_screen.css" rel="stylesheet" type="text/css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+    <title>База знаний Монтплан</title>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo_block">
+            <img src="./src/image/logo.png" alt="logo">
+            <span>Монтплан</span>
+        </div>
+
+        <nav id="sidebarNav">
+            <!-- Меню будет генерироваться динамически -->
+        </nav>
+
+        <div class="logout_container">
+            <div class="logout_block">
+                <img src="./src/image/logout.png" alt="Выйти">
+                <a href="#" id="logoutLink">Выйти</a>
+            </div>
+        </div>
+    </div>
+    
+    <main>
+        <header>
+            <div class="title_block">Настройки профиля</div>
+
+            <div class="user_block">
+                <div class="user_info">
+                    <span id="userName">Загрузка...</span>
+                    <div class="user_role" id="userRole">Загрузка...</div>
+                </div>
+                <img src="./src/image/account_round_icon.png" alt="Аккаунт">
+            </div>
+        </header>
+
+        <div class="content_block">
+            <div class="profile_block">
+                <img src="./src/image/account_round_icon2.png" alt="Аккаунт">
+                <div class="profile_info">
+                    <div class="profile_name" id="profileName">Загрузка...</div>
+                    <div class="profile_mail" id="profileEmail">Загрузка...</div>
+                    <div class="profile_role" id="profileRole">Загрузка...</div>
+                </div>
+            </div>
+
+            <div class="change_password_block">
+                <div class="change_password_title">Смена пароля</div>
+                <form id="passwordForm">
+                    <div class="form_input_block">
+                        <input class="form_input" placeholder="Введите старый пароль" type="password" id="oldPassword" required>
+                    </div>
+                    <div class="form_input_block">
+                        <input class="form_input" placeholder="Введите новый пароль" type="password" id="newPassword" required>
+                    </div>
+                    <div class="form_input_block">
+                        <input class="form_input" placeholder="Повторите пароль" type="password" id="confirmPassword" required>
+                    </div>
+                    <div class="form_button_block">
+                        <button class="form_button" type="submit" id="submitButton">
+                            <img src="./src/gif/loading.gif" alt="Загрузка" class="loading-gif" id="loadingGif">
+                            <span id="buttonText">Сменить</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно успеха -->
+    <div id="successModal" class="modal_container">
+        <div class="modal_block">
+            <div class="modal_header">
+                <h2>Успешно</h2>
+                <button class="modal_close"><img src="./src/image/close.png" alt="Закрыть"></button>
+            </div>
+            <div class="modal_body">
+                <p>Пароль успешно изменён.</p>
+            </div>
+            <div class="form_actions">
+                <button type="button" class="modal_submit" id="successConfirm">Ок</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно ошибки -->
+    <div id="errorModal" class="modal_container">
+        <div class="modal_block">
+            <div class="modal_header">
+                <h2>Ошибка</h2>
+                <button class="modal_close"><img src="./src/image/close.png" alt="Закрыть"></button>
+            </div>
+            <div class="modal_body">
+                <p id="errorMessage">Произошла ошибка.</p>
+            </div>
+            <div class="form_actions">
+                <button type="button" class="modal_submit" id="errorConfirm">Ок</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./navigation.js"></script>
+    <script>
+    // Обработчик формы смены пароля
+    document.getElementById('passwordForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const submitButton = document.getElementById('submitButton');
+        const buttonText = document.getElementById('buttonText');
+        const loadingGif = document.getElementById('loadingGif');
+
+        // Сброс состояния кнопки
+        submitButton.classList.add('loading');
+        loadingGif.style.display = 'block';
+        submitButton.disabled = true;
+
+        const formData = {
+            oldPassword: document.getElementById('oldPassword').value,
+            newPassword: document.getElementById('newPassword').value,
+            confirmPassword: document.getElementById('confirmPassword').value
+        };
+
+        try {
+            const response = await fetch('/api/change-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+                credentials: 'include'
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Показываем только модальное окно
+                showSuccessModal();
+                document.getElementById('passwordForm').reset();
+            } else {
+                // Если ошибка — можно оставить временное сообщение (опционально)
+                showErrorModal(result.message); // или использовать другое модальное окно для ошибок
+            }
+        } catch (error) {
+            showErrorModal('Ошибка подключения к серверу');
+        } finally {
+            // Восстанавливаем кнопку
+            submitButton.classList.remove('loading');
+            loadingGif.style.display = 'none';
+            submitButton.disabled = false;
+        }
+    });
+
+    // Функция показа модального окна успеха
+    function showSuccessModal() {
+        const modal = document.getElementById('successModal');
+        const closeBtn = modal.querySelector('.modal_close');
+        const confirmBtn = document.getElementById('successConfirm');
+
+        function closeModal() {
+            modal.classList.remove('active');
+            closeBtn.removeEventListener('click', closeModal);
+            confirmBtn.removeEventListener('click', closeModal);
+            modal.removeEventListener('click', handleOverlayClick);
+        }
+
+        function handleOverlayClick(e) {
+            if (e.target === modal) closeModal();
+        }
+
+        // Открываем модальное окно
+        modal.classList.add('active');
+
+        // Обработчики
+        closeBtn.addEventListener('click', closeModal);
+        confirmBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', handleOverlayClick);
+    }
+
+    // Функция загрузки данных пользователя
+    async function loadUserData() {
+        try {
+            const response = await fetch('/api/user');
+            
+            if (response.ok) {
+                const data = await response.json();
+                
+                if (data.user) {
+                    // Формируем строку с ролями
+                    let roleText = 'Пользователь';
+                    if (data.user.roles && data.user.roles.length > 0) {
+                        // Соединяем все роли через запятую
+                        roleText = data.user.roles.join(', ');
+                    }
+                    
+                    // Обновляем данные в хедере
+                    document.getElementById('userName').textContent = data.user.name || data.user.email;
+                    document.getElementById('userRole').textContent = roleText.toLowerCase();
+                    
+                    // Обновляем данные в блоке профиля
+                    document.getElementById('profileName').textContent = data.user.name || data.user.email;
+                    document.getElementById('profileEmail').textContent = data.user.email;
+                    document.getElementById('profileRole').textContent = roleText.toLowerCase();
+                }
+            } else {
+                console.error('Ошибка загрузки данных пользователя:', response.status);
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
+        }
+    }
+
+
+    // Смена пароля
+    document.getElementById('passwordForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const messageDiv = document.getElementById('passwordMessage');
+        const submitButton = document.getElementById('submitButton');
+        const buttonText = document.getElementById('buttonText');
+        const loadingGif = document.getElementById('loadingGif');
+        
+        // Сброс сообщений
+        messageDiv.style.display = 'none';
+        messageDiv.textContent = '';
+        
+        // Включаем гифку и убираем фон
+        submitButton.classList.add('loading');
+        loadingGif.style.display = 'block';
+        submitButton.disabled = true;
+        
+        const formData = {
+            oldPassword: document.getElementById('oldPassword').value,
+            newPassword: document.getElementById('newPassword').value,
+            confirmPassword: document.getElementById('confirmPassword').value
+        };
+        
+        try {
+            const response = await fetch('/api/change-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            
+            const result = await response.json();
+            
+            // Показываем результат
+            messageDiv.textContent = result.message;
+            messageDiv.style.color = result.success ? 'green' : 'red';
+            messageDiv.style.display = 'block';
+            
+            if (result.success) {
+                document.getElementById('passwordForm').reset();
+            }
+            
+        } catch (error) {
+            messageDiv.textContent = 'Ошибка подключения к серверу';
+            messageDiv.style.color = 'red';
+            messageDiv.style.display = 'block';
+        } finally {
+            // Выключаем гифку и восстанавливаем фон
+            submitButton.classList.remove('loading');
+            loadingGif.style.display = 'none';
+            submitButton.disabled = false;
+        }
+    });
+
+    function showErrorModal(message) {
+        const modal = document.getElementById('errorModal');
+        const messageEl = document.getElementById('errorMessage');
+        const closeBtn = modal.querySelector('.modal_close');
+        const confirmBtn = document.getElementById('errorConfirm');
+
+        messageEl.textContent = message;
+
+        function closeModal() {
+            modal.classList.remove('active');
+            closeBtn.removeEventListener('click', closeModal);
+            confirmBtn.removeEventListener('click', closeModal);
+            modal.removeEventListener('click', handleOverlayClick);
+        }
+
+        function handleOverlayClick(e) {
+            if (e.target === modal) closeModal();
+        }
+
+        modal.classList.add('active');
+        closeBtn.addEventListener('click', closeModal);
+        confirmBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', handleOverlayClick);
+    }
+
+    // Загружаем данные при загрузке страницы
+    document.addEventListener('DOMContentLoaded', loadUserData);
+    </script>
+</body>
+</html>

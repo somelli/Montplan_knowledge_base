@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: montplan-ng
+    runtime: docker
+    region: oregon
+    plan: free
+    repo: https://github.com/ваш-логин/Montplan_ng
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: ./
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: RENDER
+        value: "true"
+      - key: DATABASE_URL
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        value: https://montplan-ng.onrender.com
+      - key: PORT
+        value: 10000
+    healthCheckPath: /api/health
+    port: 10000
+    autoDeploy: true
