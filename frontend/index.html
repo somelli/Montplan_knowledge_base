@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+    <title>Авторизация</title>
+</head>
+<body>
+    <div class="autorization_container">
+        <form id="loginForm" class="autorization_form_block">
+            <h2>Авторизация</h2>
+            <input id="email" class="form_input" placeholder="Введите почту" type="email" required>
+            <input id="password" class="form_input" placeholder="Введите пароль" type="password" required>
+            <button class="form_button" type="submit">Войти в аккаунт</button>
+            <div id="message" style="display: none; margin: 20px 0; padding: 10px; border-radius: 5px;"></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+            
+            // Сброс сообщения
+            messageDiv.style.display = 'none';
+            messageDiv.textContent = '';
+            messageDiv.style.backgroundColor = '';
+            
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    messageDiv.style.backgroundColor = '#d4edda';
+                    messageDiv.style.color = '#155724';
+                    messageDiv.textContent = 'Авторизация успешна! Перенаправление...';
+                    messageDiv.style.display = 'block';
+                    
+                    // Перенаправление
+                    setTimeout(() => {
+                        window.location.href = '/template.html';
+                    }, 1000);
+                } else {
+                    messageDiv.style.backgroundColor = '#f8d7da';
+                    messageDiv.style.color = '#721c24';
+                    messageDiv.textContent = data.message || 'Ошибка авторизации';
+                    messageDiv.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                messageDiv.style.backgroundColor = '#f8d7da';
+                messageDiv.style.color = '#721c24';
+                messageDiv.textContent = 'Ошибка соединения с сервером';
+                messageDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

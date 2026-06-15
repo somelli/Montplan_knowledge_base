@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="viewing.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+    <title>База знаний Монтплан</title>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo_block">
+            <img src="./src/image/logo.png" alt="logo">
+            <span>Монтплан</span>
+        </div>
+
+        <nav id="sidebarNav">
+            <!-- Меню будет генерироваться динамически -->
+        </nav>
+
+
+        <div class="logout_container">
+            <div class="logout_block">
+                <img src="./src/image/logout.png" alt="Выйти">
+                <a href="#" id="logoutLink">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <button id="backToList" class="back_to_list">
+                <img src="./src/image/back.png" alt="Назад">
+                <span>Назад</span>
+            </button>
+                
+            <div class="user_block">
+                <div class="user_info">
+                    <span>Загрузка...</span>
+                    <div class="user_role">Загрузка...</div>
+                </div>
+                
+                <img src="./src/image/account_round_icon.png" alt="Аккаунт">
+            </div>
+        </header>
+
+        <div class="content_block">
+            <!-- Заголовок документа и кнопки -->
+            <div class="document_header_actions">
+                <h1 id="documentTitle">Название документа</h1>
+                <div class="action_buttons">
+                    <button id="addToFavourites">
+                            <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22.000000" height="22.000000" fill="none">
+                            <rect id="Закладка 2" width="22.000002" height="22.000002" x="0.000000" y="0.000000" />
+                            <path id="Форма 11" d="M15.5837 4.58325L15.5837 1.83325L3.66699 1.83325L3.66699 17.4166L6.41699 16.0416" fill-rule="nonzero" stroke="rgb(255,255,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+                            <path id="Форма 12" d="M6.41699 4.58325L18.3337 4.58325L18.3337 20.1666L12.3753 17.2916L6.41699 20.1666L6.41699 4.58325Z" fill-rule="nonzero" stroke="rgb(255,255,255)" stroke-linejoin="round" stroke-width="1.500000" />
+                        </svg>
+                    </button>
+                    <button id="printDoc">
+                        <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22.000000" height="22.000000" fill="none">
+                            <rect id="Принтер 1" width="22.000000" height="22.000000" x="0.000000" y="0.000000" />
+                            <path id="Форма 84" d="M5.04199 14.6667L5.04199 20.1667L16.9587 20.1667L16.9587 14.6667L5.04199 14.6667Z" fill-rule="nonzero" stroke="rgb(28,77,254)" stroke-linejoin="round" stroke-width="1.500000" />
+                            <path id="Форма 85" d="M20.1663 9.16675L20.1663 17.4167L16.9659 17.4167L16.9659 14.6667L5.0324 14.6667L5.0324 17.4167L1.83301 17.4167L1.83301 9.16675L20.1663 9.16675Z" fill-rule="evenodd" stroke="rgb(28,77,254)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+                            <path id="Форма 86" d="M4.58301 1.83325L4.58301 9.16659L17.4163 9.16659L17.4163 1.83325L4.58301 1.83325Z" fill-rule="nonzero" stroke="rgb(28,77,254)" stroke-linejoin="round" stroke-width="1.500000" />
+                        </svg>
+                    </button>
+                    <button id="downloadDoc">
+                        <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22.000000" height="22.000000" fill="none">
+                            <rect id="Скачать 3 1" width="22.000000" height="22.000000" x="0.000000" y="0.000000" />
+                            <path id="Форма 30" d="M5.35195 9.29077C3.33394 9.77069 1.83301 11.585 1.83301 13.7499C1.83301 16.2812 3.88503 18.3332 6.41634 18.3332C6.85057 18.3332 7.27067 18.2729 7.66874 18.16" fill-rule="nonzero" stroke="rgb(28,77,254)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+                            <path id="Форма 31" d="M16.5248 9.29077C18.5428 9.77069 20.0437 11.585 20.0437 13.7499C20.0437 16.2812 17.9917 18.3332 15.4604 18.3332C15.0262 18.3332 14.6061 18.2729 14.208 18.16" fill-rule="nonzero" stroke="rgb(28,77,254)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+                            <path id="Форма 32" d="M16.5 9.16675C16.5 6.12919 14.0376 3.66675 11 3.66675C7.96244 3.66675 5.5 6.12919 5.5 9.16675" fill-rule="nonzero" stroke="rgb(28,77,254)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+                            <path id="Форма 33" d="M7.82129 13.8045L10.9996 16.9934L14.2684 13.75" fill-rule="nonzero" stroke="rgb(28,77,254)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.466666" />
+                            <path id="Форма 34" d="M11 9.16675L11.001 16.603" stroke="rgb(28,77,254)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+                        </svg>
+                    </button>
+                    <button id="editDoc">
+                        <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22.000000" height="22.000000" fill="none">
+                            <rect id="Редактировать 1" width="22.000000" height="22.000000" x="0.000000" y="0.000000" />
+                            <path id="Форма 87" d="M3.20801 19.25L19.708 19.25" stroke="rgb(28,77,254)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+                            <path id="Форма 88" d="M5.04199 15.5833L8.39571 15.5833L17.8753 6.09955L14.5272 2.75L5.04199 12.2466L5.04199 15.5833Z" fill-rule="nonzero" stroke="rgb(28,77,254)" stroke-linejoin="round" stroke-width="1.500000" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Основная секция: три колонки -->
+            <div class="viewing_layout">
+                <!-- Лево: Информация о документе и ИИ -->
+                <div class="left_column">
+                    <div class="info_panel">
+                        <h3>Информация</h3>
+                        <div class="info_container">
+                            <div class="info_item">
+                                <strong>Категория</strong>
+                                <span id="docCategory" class="doc_category">—</span>
+                            </div>
+                            <div class="info_item">
+                                <strong>Теги</strong>
+                                <div id="docTags" class="tags_list"></div>
+                            </div>
+                            <div class="info_item">
+                                <strong>Дата загрузки</strong>
+                                <span id="docUploadDate" class="doc_upload_date"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Центр: Просмотр PDF -->
+                <div class="pdf_viewer">
+                    <div class="pdf_controls">
+                        <div class="zoom_controls">
+                            <button id="zoomOut" class="zoom_btn">−</button>
+                            <span id="zoomValue">100%</span>
+                            <button id="zoomIn" class="zoom_btn">+</button>
+                        </div>
+                        <div class="navigation_page">
+                            <button id="prevPage" class="prev_page">
+                                <svg viewBox="0 0 5.02734 9.02783" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5.027344" height="9.027832" fill="none" customFrame="#000000">
+                                    <g id="Сочетание 74">
+                                        <path id="Форма 4" d="M0.50293 8.52532L4.49735 4.514L0.50293 0.502686" fill-rule="nonzero" stroke="rgb(100,116,139)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.000941" />
+                                    </g>
+                                </svg>
+                            </button>
+                            <span id="pageInfo"><span id="currentPage">1</span> / <span id="pageCount">?</span></span>
+                            <button id="nextPage" class="next_page">
+                                <svg viewBox="0 0 5.02734 9.02783" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5.027344" height="9.027832" fill="none" customFrame="#000000">
+                                    <g id="Сочетание 74">
+                                        <path id="Форма 4" d="M0.50293 8.52532L4.49735 4.514L0.50293 0.502686" fill-rule="nonzero" stroke="rgb(100,116,139)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.000941" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pdf_container" id="pdfContainer">
+                        <div id="pdfCanvasContainer"></div>
+                    </div>
+                </div>
+
+                <!-- Право: Инструменты -->
+                <div class="tools_panel">
+                    <div class="tools_add">
+                        <div class="tools_title">
+                            <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22.000000" height="22.000000" fill="none">
+                                <rect id="Редактировать 1" width="22.000000" height="22.000000" x="0.000000" y="0.000000" />
+                                <path id="Форма 87" d="M3.20801 19.25L19.708 19.25" stroke="rgb(28,77,254)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+                                <path id="Форма 88" d="M5.04199 15.5833L8.39571 15.5833L17.8753 6.09955L14.5272 2.75L5.04199 12.2466L5.04199 15.5833Z" fill-rule="nonzero" stroke="rgb(28,77,254)" stroke-linejoin="round" stroke-width="1.500000" />
+                            </svg>
+                            <span>Инструменты</span>
+                        </div>
+
+                        <div class="tools_conteiner">
+                            <button id="addBookmark" class="add_bookmark">
+                                <img src="/src/image/bookmarks.png" alt="Закладка">
+                                <span>Добавить закладку</span>
+                            </button>
+
+                            <button id="addNote" class="add_note">
+                                <img src="/src/image/plus_blue.png" alt="Заметка">
+                                <span>Добавить заметку</span>
+                            </button>
+                        </div>
+                    </div>
+
+                   <div class="user_notes">
+                        <div class="tools_buttons">
+                            <button id="userNotesTitle">Заметки</button>
+                            <button id="userBookmarksTitle">Закладки</button>
+                        </div>
+                        
+                        <div id="notesList">
+                            <!-- Заметки будут добавляться сюда -->
+                        </div>
+
+                        <div id="bookmarksList" style="display: none;">
+                            <!-- Закладки будут здесь -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно для ввода -->
+    <div id="modalInput" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3 id="modalTitle">Добавить заметку</h3>
+            <textarea id="modalInputText" placeholder="Введите текст..." maxlength="500"></textarea>
+            <div class="modal-actions">
+                <button id="modalCancel" class="btn-secondary">Отмена</button>
+                <button id="modalConfirm" class="btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно подтверждения -->
+    <div id="confirmModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3 id="confirmTitle">Подтвердите действие</h3>
+            <p id="confirmMessage">Вы уверены, что хотите выполнить это действие?</p>
+            <div class="modal-actions">
+                <button id="confirmCancel" class="btn-secondary">Отмена</button>
+                <button id="confirmDelete" class="btn-danger">Удалить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Полупрозрачная подложка -->
+    <div id="modalOverlay" class="modal-overlay" style="display: none;"></div>
+
+    <script type="module" src="./pdf-config.js"></script>
+    <script src="./navigation.js"></script>
+    <script type="module" src="./document_viewer.js"></script>
+<script>
+</script>
+</body>
+</html>
+

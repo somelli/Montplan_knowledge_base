@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="folder_view.css">
+    <link href="media_screen.css" rel="stylesheet" type="text/css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+    <title>База знаний Монтплан</title>
+</head>
+
+<body>
+    <div id="notification" class="notification">
+        <div class="notification_content">
+            <span id="notificationMessage"></span>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="logo_block">
+            <img src="./src/image/logo.png" alt="logo">
+            <span>Монтплан</span>
+        </div>
+
+        <nav id="sidebarNav">
+            <!-- Меню будет генерироваться динамически -->
+        </nav>
+
+        <div class="logout_container">
+            <div class="logout_block">
+                <img src="./src/image/logout.png" alt="Выйти">
+                <a href="#" id="logoutLink">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <button id="backToList" class="back_to_list">
+                <img src="./src/image/back.png" alt="Назад">
+                <span>Назад</span>
+            </button>
+
+            <div class="user_block">
+                <div class="user_info">
+                    <span>Загрузка...</span>
+                    <div class="user_role">Загрузка...</div>
+                </div>
+                
+                <img src="./src/image/account_round_icon.png" alt="Аккаунт">
+            </div>
+        </header>
+
+        <div class="content_block">
+            <div class="welcome_header">
+                <div class="main_title">Загрузка...</div>
+
+                <div class="actions_col">
+                    <button class="action_btn edit_btn" title="Редактировать">
+                        <img src="./src/image/edit.svg" alt="Редактировать">
+                    </button>
+                    <button class="action_btn delete_btn" id="bulkDeleteBtn" style="display: none;" title="Удалить выбранные документы">
+                        <img src="./src/image/delete.png" alt="Удалить">
+                    </button>
+                </div>
+            </div>
+
+            <div class="table_block">
+                <div class="table_container" id="all_documents_table">
+                    <table class="data_table">
+                        <colgroup class="colgroup-normal">
+                            <col class="col-checkbox" style="width: 5%;">
+                            <col class="doc_col" style="width: 50%;">
+                            <col class="date_col" style="width: 15%;">
+                        </colgroup>
+
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="select_all_docs" style="display: none;"></th>
+                                <th>Документ</th>
+                                <th>Дата добавления</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="all_table_body">
+                            <tr class="loading_row">
+                                <td colspan="2">Загрузка данных...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./navigation.js"></script>
+    <script src="./folder_view.js"></script>
+</body>
+</html>

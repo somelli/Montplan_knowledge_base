@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_DEBUG=false
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_NUM_PARALLEL=1
+      - OLLAMA_MAX_LOADED_MODELS=1
+    restart: unless-stopped
+
+  ai_classifier:
+    build:
+      context: ./ai_classifier
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TRANSFORMERS_CACHE=/cache/huggingface
+      - HF_HOME=/cache/huggingface
+    volumes:
+      - ./ai_classifier:/app
+      - ai_model_cache:/cache/huggingface
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  chat-assistant:
+    build:
+      context: ./ai_chat
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - OLLAMA_URL=http://ollama:11434
+      - OLLAMA_MODEL=qwen2.5:1.5b 
+    volumes:
+      - ./ai_chat:/app
+      - chat_model_cache:/cache/huggingface
+    restart: unless-stopped
+    depends_on:
+      - ollama
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - ai_classifier
+      - chat-assistant
+    restart: unless-stopped
+    environment:
+      - RESEND_API_KEY=re_4WGJPnqd_6TEe7hSFS7zeJDdW2wWjybue
+      - FRONTEND_URL=http://localhost:80
+      - AI_CHAT_URL=http://chat-assistant:8000
+      - AI_SERVICE_URL=http://ai_classifier:5001
+    volumes:
+      - ./backend/server.js:/app/server.js
+      - ./backend/.env:/app/.env
+      - ./documents:/app/documents
+      - ./previews:/app/previews
+      - ./frontend:/usr/share/nginx/html
+
+volumes:
+  ai_model_cache:  # ← Здесь вы ОБЪЯВЛЯЕТЕ volume
+    driver: local
+  chat_model_cache:        # Кэш для модели чата
+    driver: local
+  ollama_models:  # НОВЫЙ VOLUME для моделей Ollama
+    driver: local
+  # frontend больше не нужен как отдельный сервис — он внутри backend

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="favourites.css">
+    <link href="media_screen.css" rel="stylesheet" type="text/css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+    <title>Избранное - База знаний Монтплан</title>
+</head>
+
+<body>
+    <div id="notification" class="notification">
+        <div class="notification_content">
+            <span id="notificationMessage"></span>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="logo_block">
+            <img src="./src/image/logo.png" alt="logo">
+            <span>Монтплан</span>
+        </div>
+
+        <nav id="sidebarNav">
+            <!-- Меню будет генерироваться динамически -->
+        </nav>
+
+        <div class="logout_container">
+            <div class="logout_block">
+                <img src="./src/image/logout.png" alt="Выйти">
+                <a href="#" id="logoutLink">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <div class="title_block">Избранное</div>
+
+            <div class="user_block">
+                <div class="user_info">
+                    <span>Загрузка...</span>
+                    <div class="user_role">Загрузка...</div>
+                </div>
+                
+                <img src="./src/image/account_round_icon.png" alt="Аккаунт">
+            </div>
+        </header>
+
+        <div class="content_block">
+            <div class="welcome_header">
+                <div class="main_title">Все избранное</div>
+                <div class="sub_greeting">Ваши сохраненные документы</div>
+            </div>
+
+            <div class="stats_container">
+                <div class="stats_row">
+                    <div class="stat_item">
+                        <div class="stat_info">
+                            <span class="stat_label">Всего документов</span>
+                            <span class="stat_number">0</span>
+                        </div>
+                        <img class="favorite_img" src="./src/image/favorite.png" alt="Избранное">
+                    </div>
+                    <div class="stat_item">
+                        <div class="stat_info">
+                            <span class="stat_label">Папок</span>
+                            <span class="stat_number">0</span>
+                        </div>
+                        <img class="folder_img" src="./src/image/favorite_folders.png" alt="Папки">
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls_container">
+                <div class="switch_controls_block">
+                    <button class="control_button active" data-tab="all">Все документы</button>
+                    <button class="control_button" data-tab="folders">Папки</button>
+                </div>
+
+                <button class="add_button" id="createFolderBtn">
+                    <img src="./src/image/plus.png" alt="Плюс">
+                    <span>Создать папку</span>
+                </button>
+            </div>
+
+            <div class="table_block">
+                <!-- Таблица всех документов -->
+                <div class="table_container active" id="all_documents_table">
+                    <table class="data_table">
+                        <colgroup>
+                            <col style="width: 50%;">
+                            <col style="width: 20%;">
+                            <col style="width: 15%;">
+                            <col style="width: 15%;">
+                        </colgroup>
+
+                        <thead>
+                            <tr>
+                                <th>Документ</th>
+                                <th>Категория</th>
+                                <th>Дата добавления</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="all_table_body">
+                            <tr class="loading_row">
+                                <td colspan="4">Загрузка данных...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Таблица папок -->
+                <div class="table_container" id="folders_table">
+                    <table class="data_table">
+                        <colgroup>
+                            <col style="width: 70%;">
+                            <col style="width: 15%;">
+                            <col style="width: 15%;">
+                        </colgroup>
+
+                        <thead>
+                            <tr>
+                                <th>Папка</th>
+                                <th>Документов</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="folders_table_body">
+                            <tr class="loading_row">
+                                <td colspan="4">Загрузка данных...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для создания/редактирования папки -->
+        <div id="folderModal" class="modal_container">
+            <div class="modal_block">
+                <div class="modal_header">
+                    <h2 id="folderModalTitle">Создать папку</h2>
+                    <button class="modal_close"><img src="./src/image/close.png" alt="Закрыть"></button>
+                </div>
+                <div class="modal_body">
+                    <form id="folderForm">
+                        <input type="hidden" id="folderId">
+
+                        <div class="form_group">
+                            <label for="folderName">Название папки</label>
+                            <input type="text" id="folderName" name="name" required 
+                                placeholder="Введите название папки" autocomplete="off">
+                        </div>
+
+                        <div class="form_group">
+                            <label>Цвет папки</label>
+                            <div class="color_palette_container">
+                                <div class="color_palette" id="colorPalette">
+                                    <!-- Цвета будут добавлены через JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form_actions">
+                            <button type="button" class="modal_cancel">Отмена</button>
+                            <button type="submit" class="modal_submit">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для перемещения в папку -->
+        <div id="moveToFolderModal" class="modal_container">
+            <div class="modal_block">
+                <div class="modal_header">
+                    <h2>Переместить в папку</h2>
+                    <button class="modal_close"><img src="./src/image/close.png" alt="Закрыть"></button>
+                </div>
+                <div class="modal_body">
+                    <form id="moveToFolderForm">
+                        <div class="form_group">
+                            <label for="folderSelect">Выберите папку</label>
+                            <!-- Кастомный селект будет создан через JavaScript -->
+                        </div>
+
+                        <div class="form_actions">
+                            <button type="button" class="modal_cancel">Отмена</button>
+                            <button type="submit" class="modal_submit">Переместить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно подтверждения удаления -->
+        <div id="deleteConfirmModal" class="modal_container">
+            <div class="modal_block">
+                <div class="modal_header">
+                    <h2>Подтвердите удаление</h2>
+                    <button class="modal_close"><img src="./src/image/close.png" alt="Закрыть"></button>
+                </div>
+                <div class="modal_body">
+                    <p>Вы уверены, что хотите удалить <strong id="deleteItemName">элемент</strong>?<br>Это действие нельзя отменить.</p>
+                </div>
+                <div class="form_actions" style="padding: 20px 30px; margin: 0;">
+                    <button type="button" class="modal_cancel">Отмена</button>
+                    <button type="button" class="modal_submit" id="confirmDeleteBtn">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./navigation.js"></script>
+    <script src="./favourites.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработчик для кнопки создания папки
+            document.getElementById('createFolderBtn').addEventListener('click', function() {
+                window.openCreateFolderModal();
+            });
+        });
+    </script>
+</body>
+</html>

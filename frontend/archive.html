@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="archive.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+    <title>База знаний Монтплан</title>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo_block">
+            <img src="./src/image/logo.png" alt="logo">
+            <span>Монтплан</span>
+        </div>
+
+        <nav id="sidebarNav">
+            <!-- Меню будет генерироваться динамически -->
+        </nav>
+
+
+        <div class="logout_container">
+            <div class="logout_block">
+                <img src="./src/image/logout.png" alt="Выйти">
+                <a href="#" id="logoutLink">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <div class="title_block">Архив</div>
+
+            <div class="user_block">
+                <div class="user_info">
+                    <span>Загрузка...</span>
+                    <div class="user_role">Загрузка...</div>
+                </div>
+                
+                <img src="./src/image/account_round_icon.png" alt="Аккаунт">
+            </div>
+        </header>
+
+        <div class="content_block">
+            <!-- Документы загружаются динамически -->
+        </div>
+
+        <!-- Модальное окно оповещения о восстановлении или удалении -->
+        <div id="successModal" class="modal_container">
+            <div class="modal_block">
+                <div class="modal_header">
+                    <h2>!</h2>
+                    <button class="modal_close"><img src="./src/image/close.png" alt="Закрыть"></button>
+                </div>
+                <div class="modal_body">
+                    <p>Документ <strong id="uploadedDocName">Название документа</strong> был успешно <span></span>.</p>
+                </div>
+                <div class="form_actions">
+                    <button type="button" class="modal_cancel">Закрыть</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для ошибок и уведомлений -->
+        <div id="messageModal" class="modal_container">
+            <div class="modal_block">
+                <div class="modal_header">
+                    <h2 id="messageModalTitle">Ошибка</h2>
+                    <button class="modal_close"><img src="./src/image/close.png" alt="Закрыть"></button>
+                </div>
+                <div class="modal_body">
+                    <p id="messageModalText">Сообщение</p>
+                </div>
+                <div class="form_actions">
+                    <button type="button" class="modal_cancel">Закрыть</button>
+                </div>
+            </div>
+        </div>
+
+         <!-- Модальное окно подтверждения удаления -->
+        <div id="deleteConfirmModal" class="modal_container">
+            <div class="modal_block">
+                <div class="modal_header">
+                    <h2>Подтвердите действие</h2>
+                    <button class="modal_close"><img src="./src/image/close.png" alt="Закрыть"></button>
+                </div>
+                <div class="modal_body">
+                    <p>Вы уверены, что хотите <span></span> <strong id="deleteItemName">элемент</strong>?</p>
+                </div>
+                <div class="form_actions" style="padding: 20px 30px; margin: 0;">
+                    <button type="button" class="modal_cancel">Отмена</button>
+                    <button type="button" class="modal_submit" id="confirmDeleteBtn">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="./pdf-config.js"></script>
+    <script type="module" src="./archive.js"></script>
+    <script type="module" src="./navigation.js"></script>
+</body>
+</html>

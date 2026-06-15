@@ -1,0 +1,695 @@
+body {
+    background: #F5F9FB;
+    margin: 0;
+    padding: 0;
+    font-family: Inter;
+}
+
+button {
+    font-family: Inter;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 250px;
+    height: 100vh;
+    background: #0F172B;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .logo_block {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    margin: 14px 0 60px 0;
+}
+
+.sidebar .logo_block img{
+    height: 24px;
+    width: 51px;
+    margin-right: 6px;
+}
+
+.sidebar .logo_block span {
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav_button {
+    width: 222px;
+    height: 40px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-radius: 10px;
+    transition: background 0.2s;
+    padding-left: 35px;
+    margin-bottom: 20px;
+    background: none;
+    border: none;
+}
+
+.nav_button img {
+    width: 19px;
+    height: 19px;
+    margin-right: 12px;
+}
+
+.nav_button a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: start;
+}
+
+.nav_button.active, .nav_button:hover {
+    background: #1C4DFE;
+    color: #fff;
+}
+
+.logout_container {
+    margin-top: auto; /* прижимает к низу */
+    padding: 40px 0 100px 0;
+}
+
+.logout_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout_block img{
+    width: 14px;
+    height: 14px;
+    margin-right: 12px;
+}
+
+.logout_block a{
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: start;
+}
+
+main {
+    margin-left: 250px;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0px 40px;
+    box-shadow: 0px 1px 50px 0px rgba(0, 0, 0, 0.15);
+    background: #FFFFFF;
+}
+
+.title_block {
+    color: #0F172B;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+
+.user_block {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.user_info {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-right: 10px;
+}
+
+.user_info span{
+    color: #0F172B;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+.user_role {
+    color: #64748B;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+.user_block img {
+    width: 45px;
+    height: 45px;
+}
+
+.content_block {
+    margin: 40px;
+    height: calc(100vh - 200px);
+    border-radius: 20px;
+    padding: 30px;
+
+    box-shadow: 0px 1px 50px 0px rgba(0, 0, 0, 0.15);
+    background: #FFFFFF; 
+}
+
+.main_title {
+    color: #0F172B;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    text-align: start;
+    margin-bottom: 20px;
+}
+
+.controls_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.switch_controls_block {
+    border-radius: 10px;
+    box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.25);
+    background: #F1F5F9;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+
+}
+
+.control_button {
+    height: 40px;
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: none;
+    background: #FFFFFF;
+    color: #64748B;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: center;
+    cursor: pointer
+}
+
+.control_button.active{
+    height: 40px;
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: none;
+    background: #1C4DFE;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.control_button:hover{
+    background: #ebebeb;
+    transition: background 0.2s;
+}
+
+.control_button.active:hover{
+    background: #1b50c9;
+    transition: background 0.2s;
+}
+
+.add_button {
+    height: 40px;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 10px;
+    border: none;
+    background: #1C4DFE;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.add_button img{
+    width: 17px;
+    height: 17px;
+}
+
+    /* Стили для контейнеров таблиц */
+.table_container {
+    display: none;
+    width: 100%;
+    margin-top: 20px;
+    max-height: 600px;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+.table_container.active {
+    display: block;
+}
+
+/* Стили для таблиц */
+.data_table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #F1F5F9;
+    border-radius: 10px;
+    box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    table-layout: fixed;
+}
+
+.data_table thead th {
+    color: #64748B;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: start;
+    padding: 10px;
+}
+
+.data_table tbody td {
+    padding: 10px;
+    background: #F1F5F9;
+}
+
+.action_btn {
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background 0.2s;
+    box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.25);
+}
+
+.edit_btn {
+    background: #FFFFFF;
+}
+
+.delete_btn {
+    background: #FFDFE1;
+}
+
+.edit_btn:hover {
+    background: #ebebeb;
+}
+
+.delete_btn:hover {
+    background: #ebc2c6;
+}
+
+
+.action_btn img {
+    width: 22px;
+    height: 22px;
+}
+
+.user_col {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: #0F172B;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: start;
+}
+
+.user_icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    background-color: #1C4DFE;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.email_col {
+    width: 30%;
+    color: #64748B;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: start;
+}
+
+.roles_col {
+    width: 30%;
+    color: #0F172B;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: start;
+}
+
+.actions_col {
+    width: 90px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.category_col {
+    width: 80%;
+}
+
+.category_block {
+    color: #0F172B;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    display: flex;
+    align-items: center;/* ← выравнивание по центру по вертикали */
+    gap: 10px; 
+    flex-wrap: nowrap;  
+}
+ 
+.category_block img {
+    width: 36px;
+    height: 36px;
+}
+
+.tag_col {
+    width: 80%;
+}
+
+.tag_block {
+    color: #0F172B;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    display: flex;
+    align-items: center;/* ← выравнивание по центру по вертикали */
+    gap: 10px; 
+    flex-wrap: nowrap;  
+}
+ 
+.tag_block img {
+    width: 35px;
+    height: 35px;
+}
+
+.role_col {
+    width: 80%;
+}
+
+.role_block {
+    color: #0F172B;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    display: flex;
+    align-items: center;/* ← выравнивание по центру по вертикали */
+    gap: 10px; 
+    flex-wrap: nowrap;  
+}
+ 
+.role_block img {
+    width: 35px;
+    height: 35px;
+}
+/* модальное окно для добавления пользователя */
+
+/* Стили для модального окна */
+.modal_container {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal_container.active {
+    display: flex;
+}
+
+.modal_block {
+    background: #FFFFFF;
+    border-radius: 20px;
+    width: 500px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+}
+
+.modal_header h2 {
+    color: #0F172B;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0px;
+    text-align: start;
+    margin: 0;
+}
+
+.modal_close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal_close img{
+    width: 20px;
+    height: 20px;
+}
+
+.modal_body {
+    padding: 20px 30px;
+}
+
+.form_group {
+    margin-bottom: 20px;
+    position: relative; /* ← чтобы absolute внутри работал правильно */
+    overflow: visible;
+}
+
+.form_group label {
+    display: block;
+    margin-bottom: 10px;
+    color: #0F172B;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: start;
+}
+
+.form_group input[type="text"],
+.form_group input[type="email"],
+.form_group input[type="password"],
+.form_group select {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: #F1F5F9;
+    box-sizing: border-box;
+    color: #0F172B;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-align: start;
+}
+
+.form_group input:focus,
+.form_group select:focus {
+    outline: none;
+    outline: 2px solid #1C4DFE;
+}
+
+.form_group input::placeholder {
+    color: #64748B;
+}
+
+.suggestions-list {
+    position: absolute;
+    background: #F1F5F9;
+    border: none;
+    border-radius: 10px;
+    max-height: 80px;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1002;
+    width: calc(100% - 2px);
+    display: none;
+}
+
+.suggestions-list li {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: none;
+    color: #0F172B;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0px;
+}
+
+.suggestions-list li:hover,
+.suggestions-list li.selected {
+    background: #f6f9fc
+}
+
+.suggestions-list li:last-child {
+    border-bottom: none;
+}
+
+.form_actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;  
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.modal_cancel,
+.modal_submit {
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+}
+
+.modal_cancel {
+    background: #F1F5F9;
+    color: #0F172B;
+}
+
+.modal_cancel:hover {
+    background: #E2E8F0;
+}
+
+.modal_submit {
+    background: #FFDFE1;
+    color: #903D41;
+}
+
+.modal_submit:hover {
+    background: #ebc2c6;
+}
+
+.modal_submit:disabled {
+    background: #94A3B8;
+    cursor: not-allowed;
+}
+
+/* Стили для модального окна подтверждения удаления */
+#deleteConfirmModal .modal_body {
+    padding: 20px 30px;
+    font-size: 18px;
+    color: #0F172B;
+    text-align: center;
+}
+
+#deleteConfirmModal .modal_body p {
+    margin: 0;
+}
+
+/* Стили для сообщений об ошибках */
+.form_error {
+    color: #EF4444;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+
+.form_error.show {
+    display: block;
+}
+
+.password_mismatch {
+    border-color: #EF4444 !important;
+}
+
+/* уведомление */
+
+.notification {
+    position: fixed;
+    top: 120px;
+    right: 60px;
+    background: #10B981;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: none;
+    z-index: 1001;
+    animation: slideIn 0.3s ease-out;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.notification.show {
+    display: block;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
